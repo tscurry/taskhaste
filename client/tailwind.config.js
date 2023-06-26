@@ -9,7 +9,8 @@ module.exports = {
         "light-purple": "#ccd1f9",
         "light-green": "#b5ead7",
         coral: "#e9967a",
-        'facebook-button': '#4267B2',
+        "facebook-button": "#4267B2",
+        orange: "#ff7f50",
       },
       fontFamily: {
         display: ["Ubuntu", "sans-serif"],
@@ -25,6 +26,10 @@ module.exports = {
         "pet-care": "url('./assets/pet-care.gif')",
         shopping: "url('./assets/shopping.gif')",
         "tech-help": "url('./assets/tech-help.gif')",
+        "cta-background": "url('assets/cta-background.svg')",
+      },
+      gridTemplateColumns: {
+        dashbaord: "minmax(75px, 225px) max-content",
       },
     },
     screens: {
