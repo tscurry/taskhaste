@@ -38,12 +38,12 @@ export const Task = () => {
         </button>
       </div>
       <div className="mt-[100px] flex mx-2 lg:mx-12">
-        <button className={`${!auth ? "bg-white" : "bg-background"} p-1 rounded-xl text-sm w-[120px] font-bold mr-1 hidden`}>Categories</button>
-        <button className={`${!auth ? "bg-white" : "bg-background"} p-1 rounded-xl text-sm w-[75px] font-bold mr-1`}>Date</button>
-        <button className={`${!auth ? "bg-white" : "bg-background"} p-1 rounded-xl text-sm w-[85px] font-bold mr-1 lg:w-[100px]`}>
+        <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[120px] font-bold mr-1 hidden`}>Categories</button>
+        <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[75px] font-bold mr-1`}>Date</button>
+        <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[85px] font-bold mr-1 lg:w-[100px]`}>
           Price <RiArrowDropDownLine size={25} className="inline" />
         </button>
-        <button className={`${!auth ? "bg-white" : "bg-background"} p-1 rounded-xl text-sm w-[100px] font-bold`}>Location</button>
+        <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[100px] font-bold`}>Location</button>
       </div>
       <div className="mt-[50px] mx-2 lg:mx-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {Array(20)
