@@ -28,9 +28,6 @@ module.exports = {
         "tech-help": "url('./assets/tech-help.gif')",
         "cta-background": "url('assets/cta-background.svg')",
       },
-      gridTemplateColumns: {
-        dashbaord: "minmax(75px, 225px) max-content",
-      },
     },
     screens: {
       xs: "490px",

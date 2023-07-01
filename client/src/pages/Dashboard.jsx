@@ -48,7 +48,7 @@ const Dashboard = () => {
         <div className="my-14">
           <h2 className="font-medium text-lg lg:text-2xl mb-5">Active Tasks</h2>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {Array(4)
+            {Array(10)
               .fill()
               .map((_, index) => (
                 <div className="rounded-xl bg-background">
@@ -85,7 +85,7 @@ const Dashboard = () => {
               <p className="col-span-1">{activity.type}</p>
               <p className="col-span-1">{activity.date}</p>
               <div className={`${activity.status === "Completed" ? "bg-[#008000]" : "bg-[#FFA500]"} rounded-lg p-1 md:w-[120px] h-max col-span-1`}>
-                <p className="text-xs text-center text-white">{activity.status}</p>
+                <p className="text-[8px] sm:text-xs text-center text-white">{activity.status}</p>
               </div>
               <hr className="w-full border-primary opacity-50 col-span-4 my-3" />
             </div>

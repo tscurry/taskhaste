@@ -45,22 +45,24 @@ export const Task = () => {
         </button>
         <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[100px] font-bold`}>Location</button>
       </div>
-      <div className="mt-[50px] mx-2 lg:mx-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div className="mt-[50px] mx-2 lg:mx-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
         {Array(20)
           .fill()
           .map((_, index) => (
             <div className="relative col-span-1">
-              <img src={sample} alt="avatar" className="rounded-xl w-full h-[175px] mb-3" />
+              <img src={sample} alt="avatar" className="rounded-tl-xl rounded-tr-xl w-full h-[175px]" />
               <p className="rounded-e-xl bg-orange text-xs w-[125px] h-[20px] text-center text-white absolute top-[5%]">Landscaping</p>
-              <div className="flex justify-between px-1">
-                <p className="font-bold text-xs">Grass cutting in Jennings</p>
-                <p className="font-bold text-sm">$120</p>
-              </div>
-              <div className="flex justify-between px-1 mt-2 items-end">
-                <p className="font-bold opacity-60">Ant Head</p>
-                <button className="rounded-md bg-primary text-sm text-white w-[110px] h-[35px] hover:scale-[105%] transition-transform duration-500">
-                  View Details
-                </button>
+              <div className="bg-gray-100 pt-3 rounded-bl-xl rounded-br-xl">
+                <div className="flex justify-between px-2">
+                  <p className="font-bold text-xs break-all">Grass cutting in Jennings</p>
+                  <p className="font-bold text-sm ml-1">$120</p>
+                </div>
+                <div className="flex justify-between px-2 mt-2 mb-5 items-end pb-4">
+                  <p className="font-bold opacity-60 text-sm">Ant Head</p>
+                  <button className="rounded-md bg-primary text-sm text-white w-[110px] h-[35px] hover:scale-[105%] transition-transform duration-500">
+                    View Details
+                  </button>
+                </div>
               </div>
             </div>
           ))}

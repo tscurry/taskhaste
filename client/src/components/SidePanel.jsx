@@ -25,7 +25,9 @@ const SidePanel = () => {
         <div className="hidden lg:flex lg:mb-[75px] items-center flex-col">
           <img className="mb-[10px] mt-10 h-24 w-24 rounded-full" src={user} alt="user " />
           <p className="mb-[10px]">Joshua Williams</p>
-          <button className="w-[90px] text-sm h-[25px] rounded bg-primary text-white">Edit</button>
+          <button className="w-[90px] text-sm h-[25px] rounded bg-primary text-white hover:scale-[105%] transition-transform duration-500 ">
+            Edit
+          </button>
         </div>
         <div className="flex flex-col items-center">
           <div
