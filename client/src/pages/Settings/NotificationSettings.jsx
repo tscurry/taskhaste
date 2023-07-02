@@ -63,9 +63,9 @@ const NotificationSettings = () => {
           <p className="text-xs opacity-60">Choose the types of email notifications you want to receive</p>
         </div>
         <FormGroup className="ml-5 lg:mr-[120px]">
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>New task notifcation</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Task updates</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Account updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>New task notifcation</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Task updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Account updates</Typography>} />
         </FormGroup>
       </div>
       <div className="flex justify-between pb-5 pt-7 border-b-[2px]">
@@ -74,9 +74,9 @@ const NotificationSettings = () => {
           <p className="text-xs opacity-60">Choose the types of SMS notifications you want to receive</p>
         </div>
         <FormGroup className="ml-5 lg:mr-[120px]">
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>New task notifcation</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Task updates</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Account updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>New task notifcation</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Task updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Account updates</Typography>} />
         </FormGroup>
       </div>
       <div className="flex justify-between pb-5 pt-7 border-b-[2px]">
@@ -85,9 +85,9 @@ const NotificationSettings = () => {
           <p className="text-xs opacity-60">Choose the types of push notifications you want to receive</p>
         </div>
         <FormGroup className="ml-5 lg:mr-[120px]">
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>New task notifcation</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Task updates</Typography>} />
-          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "14px" }}>Account updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>New task notifcation</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Task updates</Typography>} />
+          <FormControlLabel control={<CustomSwitch />} label={<Typography sx={{ fontSize: "12px" }}>Account updates</Typography>} />
         </FormGroup>
       </div>
       <button type="submit" className="transition-transform duration-500 hover:scale-[105%] my-10 py-2 px-4 bg-primary text-white rounded text-sm">

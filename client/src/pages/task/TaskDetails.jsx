@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Rating } from "@mui/material";
 
-import sample from "../assets/sample.jpg";
+import sample from "../../assets/sample.jpg";
 
 const TaskDetails = () => {
   return (

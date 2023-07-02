@@ -11,12 +11,23 @@ import signUp from "../assets/sign-up-login-task-illustration.svg";
 const SignUp = () => {
   const [firstToggle, setFirstToggle] = React.useState(false);
   const [secondToggle, setSecondToggle] = React.useState(false);
+  const [name, setName] = React.useState("");
+  const [address, setAddress] = React.useState(null);
+  const [mobile, setMobile] = React.useState(null);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [step, setStep] = React.useState(1);
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
   const prevStep = () => setStep(prevStep => prevStep - 1);
 
-  console.log(step);
+  const formValidation = () => {
+    const validName = name !== "";
+    const validAddress = address !== null;
+    const validMobile = mobile !== null;
+
+    return validName && validAddress && validMobile;
+  };
 
   const personalDetaills = () => {
     return (
@@ -38,6 +49,7 @@ const SignUp = () => {
               name="display-name"
               id="display-name"
               placeholder="Enter your display name"
+              onChange={e => setName(e.target.name)}
             />
           </div>
           <label htmlFor="address" className="max-xs:w-[295px] max-sm:w-[315px] max-md:w-[415px] text-xs font-medium mb-[7px] w-[370px] text-left">
@@ -144,10 +156,11 @@ const SignUp = () => {
                   <MdEmail className="absolute left-2 top-1/2 -translate-y-1/2 transform" />
                   <input
                     className="pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 border-primary w-[375px] h-[35px] rounded-md text-xs border"
-                    type="text"
+                    type="email"
                     name="email"
                     id="email"
                     placeholder="Enter your email address"
+                    required
                   />
                 </div>
                 <label
@@ -164,6 +177,7 @@ const SignUp = () => {
                     name="password"
                     id="password"
                     placeholder="Enter your password"
+                    required
                   />
                   <div onClick={togglePassword}>
                     {firstToggle ? (
@@ -187,6 +201,7 @@ const SignUp = () => {
                     name="confirm-password"
                     id="confirm-password"
                     placeholder="Confirm your password"
+                    required
                   />
                   <div onClick={toggleConfirm}>
                     {secondToggle ? (
@@ -199,7 +214,8 @@ const SignUp = () => {
                 <button
                   onClick={nextStep}
                   type="submit"
-                  className="max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] border rounded-md h-[35px] w-[380px] bg-primary text-white text-xs"
+                  className="disabled:bg-[#ccc] max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] border rounded-md h-[35px] w-[380px] bg-primary text-white text-xs"
+                  disabled={!formValidation}
                 >
                   Next
                 </button>

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-import ctaBackground from "../assets/cta-background.svg";
-import sample from "../assets/sample.jpg";
+import ctaBackground from "../../assets/cta-background.svg";
+import sample from "../../assets/sample.jpg";
 
 export const Task = () => {
   const auth = React.useState(true);
