@@ -5,6 +5,7 @@ import { BsApple, BsFillPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import validator from "validator";
 
 import signUp from "../assets/sign-up-login-task-illustration.svg";
 
@@ -16,17 +17,50 @@ const SignUp = () => {
   const [mobile, setMobile] = React.useState(null);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [step, setStep] = React.useState(1);
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
   const prevStep = () => setStep(prevStep => prevStep - 1);
 
-  const formValidation = () => {
+  const validatePassword = (pass, confirmPass) => {
+    const validPassword = pass.length >= 8;
+    const validMatch = pass === confirmPass;
+
+    return validMatch && validPassword;
+  };
+
+  const firstValidation = validator.isEmail(email) && validatePassword(password, confirmPassword);
+
+  const secondValidation = () => {
     const validName = name !== "";
     const validAddress = address !== null;
-    const validMobile = mobile !== null;
+    console.log(validator.isMobilePhone(mobile, "any"));
 
-    return validName && validAddress && validMobile;
+    return validName && validAddress && validator.isMobilePhone(mobile, "any");
+  };
+
+  const togglePassword = () => {
+    console.log(firstToggle, secondToggle);
+    setFirstToggle(!firstToggle);
+    let password = document.getElementById("password");
+
+    if (!firstToggle && password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  };
+
+  const toggleConfirm = () => {
+    setSecondToggle(!secondToggle);
+    let confirmPassword = document.getElementById("confirm-password");
+
+    if (!secondToggle && confirmPassword.type === "password") {
+      confirmPassword.type = "text";
+    } else {
+      confirmPassword.type = "password";
+    }
   };
 
   const personalDetaills = () => {
@@ -63,6 +97,7 @@ const SignUp = () => {
               name="address"
               id="address"
               placeholder="Please enter your address"
+              onChange={e => setAddress(e.target.value)}
             />
           </div>
           <label htmlFor="address" className="max-xs:w-[295px] max-sm:w-[315px] max-md:w-[415px] text-xs font-medium mb-[7px] w-[370px] text-left">
@@ -76,13 +111,18 @@ const SignUp = () => {
               name="mobile-num"
               id="mobile-num"
               placeholder="Enter your mobile number"
+              onChange={e => setMobile(e.target.value)}
             />
           </div>
           <div className="flex gap-2 w-[300px] xs:w-[320px] sm:w-[420px] md:w-[380px]">
             <button onClick={prevStep} className="w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs">
               Previous
             </button>
-            <button className="w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs" type="submit">
+            <button
+              disabled={!secondValidation()}
+              className="disabled:bg-[#ccc] w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs"
+              type="submit"
+            >
               Sign up
             </button>
           </div>
@@ -93,29 +133,6 @@ const SignUp = () => {
         </div>
       </>
     );
-  };
-
-  const togglePassword = () => {
-    console.log(firstToggle, secondToggle);
-    setFirstToggle(!firstToggle);
-    let password = document.getElementById("password");
-
-    if (!firstToggle && password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
-  };
-
-  const toggleConfirm = () => {
-    setSecondToggle(!secondToggle);
-    let confirmPassword = document.getElementById("confirm-password");
-
-    if (!secondToggle && confirmPassword.type === "password") {
-      confirmPassword.type = "text";
-    } else {
-      confirmPassword.type = "password";
-    }
   };
 
   return (
@@ -161,6 +178,7 @@ const SignUp = () => {
                     id="email"
                     placeholder="Enter your email address"
                     required
+                    onChange={e => setEmail(e.target.value)}
                   />
                 </div>
                 <label
@@ -178,6 +196,7 @@ const SignUp = () => {
                     id="password"
                     placeholder="Enter your password"
                     required
+                    onChange={e => setPassword(e.target.value)}
                   />
                   <div onClick={togglePassword}>
                     {firstToggle ? (
@@ -202,6 +221,7 @@ const SignUp = () => {
                     id="confirm-password"
                     placeholder="Confirm your password"
                     required
+                    onChange={e => setConfirmPassword(e.target.value)}
                   />
                   <div onClick={toggleConfirm}>
                     {secondToggle ? (
@@ -215,7 +235,7 @@ const SignUp = () => {
                   onClick={nextStep}
                   type="submit"
                   className="disabled:bg-[#ccc] max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] border rounded-md h-[35px] w-[380px] bg-primary text-white text-xs"
-                  disabled={!formValidation}
+                  disabled={!firstValidation}
                 >
                   Next
                 </button>

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Task, Dashboard, Settings, Reviews, SignUp } from "./pages/index";
+import { Task, Dashboard, Settings, Reviews, SignUp, Login } from "./pages/index";
 import { Logout, SidePanel, AuthenticatedHeader } from "./components/index";
 import TaskPostingForm from "./pages/task/TaskPosting";
 
 const App = () => {
   return (
-    // <TaskPostingForm />
+    <TaskPostingForm />
     // <BrowserRouter>
     //   <AuthenticatedHeader />
     //   <div className="flex w-full">
@@ -24,7 +24,6 @@ const App = () => {
     //     </div>
     //   </div>
     // </BrowserRouter>
-    <SignUp/>
   );
 };
 

@@ -5,11 +5,15 @@ import { BsApple } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import validator from "validator";
 
 import signUp from "../assets/sign-up-login-task-illustration.svg";
 
 const Login = () => {
   const [toggle, setFirstToggle] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+
+  const formValidation = validator.isEmail(email);
 
   const togglePassword = () => {
     setFirstToggle(!toggle);
@@ -30,7 +34,7 @@ const Login = () => {
             <FaRunning className="mr-[5px] h-[30px] w-[40px] max-md:h[20px] max-md:w-[20px]" />
             <h1 className="font-bold text-3xl max-md:text-2xl">taskhaste</h1>
           </div>
-          <div className="flex gap-3">
+          <form action="" method="post" className="flex gap-3">
             <div className="flex justify-center items-center flex-col mt-[45px] w-[575px]">
               <h1 className="font-bold text-3xl max-md:text-2xl">Welcome Back</h1>
               <p className="opacity-60 text-center max-md:text-sm">Please enter your details to sign in</p>
@@ -60,6 +64,8 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
+                  onChange={e => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <label
@@ -76,6 +82,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   placeholder="Enter your password"
+                  required
                 />
                 <div onClick={togglePassword}>
                   {toggle ? (
@@ -94,7 +101,8 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] border rounded-md h-[35px] w-[380px] bg-primary text-white text-xs"
+                className="disabled:bg-[#ccc] max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] border rounded-md h-[35px] w-[380px] bg-primary text-white text-xs"
+                disabled={!formValidation}
               >
                 Sign in
               </button>
@@ -106,7 +114,7 @@ const Login = () => {
             <div>
               <img className="h-[600px] w-[550px] max-md:hidden" src={signUp} alt="Sign Up illustration" />
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </>

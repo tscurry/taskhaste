@@ -17,13 +17,13 @@ const TaskPostingForm = () => {
 
   const validForm = () => {
     const validTitle = title.length > 5;
-    const validDate = date !== null;
+
     const validCost = cost > 0 && cost >= 5;
     const validLocation = location !== null;
     const validCategory = selectedCategory !== null;
     const validDescription = description.length > 10;
 
-    return validDescription && validCategory && validCost && validDate && validTitle && validLocation ? true : false;
+    return validDescription && validCategory && validCost && validTitle && validLocation;
   };
 
   const handleFormSubmit = event => {
@@ -32,9 +32,9 @@ const TaskPostingForm = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mx-5 mb-10">
-      <h1 className="font-bold text-xl lg:text-2xl mt-20">Let's Get Started With Your Task</h1>
-      <p className="mt-6 text-sm">Fill in the details below and find a capable helper for your task.</p>
-      <p className="text-sm">Quick, simple and secure. Let's get things done!</p>
+      <h1 className="font-bold text-xl lg:text-2xl mt-20 text-center">Let's Get Started With Your Task</h1>
+      <p className="mt-6 text-sm text-center">Fill in the details below and find a capable helper for your task.</p>
+      <p className="text-sm text-center">Quick, simple and secure. Let's get things done!</p>
       <form action="/task-posting" method="post" className="mt-[120px]" onSubmit={handleFormSubmit}>
         <div className="flex flex-col w-[350px] xs:w-[400px] sm:w-[500px] md:w-[600px] lg:w-[700px]">
           {completedSteps.includes(1) && (
