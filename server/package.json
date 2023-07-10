@@ -8,5 +8,8 @@
     "start": "node server.js"
   },
   "author": "Timmy Scurry",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
 }

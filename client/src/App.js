@@ -3,10 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Task, Dashboard, Settings, Reviews, SignUp, Login } from "./pages/index";
 import { Logout, SidePanel, AuthenticatedHeader } from "./components/index";
 import TaskPostingForm from "./pages/task/TaskPosting";
+import PlacesAutocomplete from "./components/PlacesAutocomplete";
 
 const App = () => {
   return (
-    <TaskPostingForm />
+    <SignUp />
+    // <TaskPostingForm />
+    // <PlacesAutocomplete/>
     // <BrowserRouter>
     //   <AuthenticatedHeader />
     //   <div className="flex w-full">

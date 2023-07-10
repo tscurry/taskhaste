@@ -1,29 +1,38 @@
 import * as React from "react";
-import { HiOutlineInformationCircle } from "react-icons/hi";
-import { Tooltip } from "@mui/material";
+import moment from "moment";
+import PlacesAutocomplete from "../../components/PlacesAutocomplete";
 
 const CATEGORIES = ["Shopping & Delivery", "Indoor Chores & Personal Assistance", "Landscaping", "Tech Help", "Pet Care"];
 
 const TaskPostingForm = () => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [title, setTitle] = React.useState("");
-  const [location, setLocation] = React.useState(null);
-  const [date, setDate] = React.useState("");
+  const [address, setAddress] = React.useState(null);
+  const [date, setDate] = React.useState(null);
   const [cost, setCost] = React.useState(null);
   const [description, setDescription] = React.useState("");
   const [completedSteps, setCompletedSteps] = React.useState([1]);
 
-  const nextValid = title.length > 5 && description.length > 10;
+  const [isFocused, setIsFocused] = React.useState({});
+  const [isValid, setIsValid] = React.useState({});
+
+  React.useEffect(() => {
+    description.length >= 10
+      ? setIsValid(prev => ({ ...prev, "task-description": true }))
+      : setIsValid(prev => ({ ...prev, "task-description": false }));
+
+    cost > 0 && cost >= 5 ? setIsValid(prev => ({ ...prev, cost: true })) : setIsValid(prev => ({ ...prev, cost: false }));
+  }, [description, cost]);
+
+  const nextValid = title.length > 5 && description.length >= 10;
 
   const validForm = () => {
+    const validDate = moment(date).isValid() ? moment(date).format("dddd, Do MMMM YYYY h:mm a") : false;
     const validTitle = title.length > 5;
-
-    const validCost = cost > 0 && cost >= 5;
-    const validLocation = location !== null;
+    const validAddress = address !== null;
     const validCategory = selectedCategory !== null;
-    const validDescription = description.length > 10;
 
-    return validDescription && validCategory && validCost && validTitle && validLocation;
+    return isValid["task-description"] && isValid["cost"] && validDate && validCategory && validTitle && validAddress;
   };
 
   const handleFormSubmit = event => {
@@ -47,6 +56,7 @@ const TaskPostingForm = () => {
                 name="task-title"
                 id="title"
                 className="rounded h-10 p-2 text-sm border-primary border-[1px]"
+                value={title}
                 required
                 onChange={e => setTitle(e.target.value)}
               />
@@ -57,13 +67,20 @@ const TaskPostingForm = () => {
                 required
                 name="task-description"
                 id="task-description"
+                value={description}
                 cols="30"
                 rows="5"
-                className="p-2 rounded border-primary border-[1px]"
+                onFocus={() => setIsFocused(prev => ({ ...prev, "task-description": true }))}
+                className={`${
+                  isFocused["task-description"] && !isValid["task-description"] ? "focus:outline-red-600 border-red-600" : "border-primary"
+                }  p-2 rounded border-[1px]`}
                 onChange={e => setDescription(e.target.value)}
               ></textarea>
+              {isFocused["task-description"] && !isValid["task-description"] && (
+                <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">Description is too short</div>
+              )}
               <button
-                className="my-5 text-sm p-2 rounded bg-primary text-white hover:scale-[102%] transition-transform duration-500 disabled:bg-[#ccc]"
+                className="my-5 text-sm p-2 rounded bg-primary text-white hover:scale-[101%] disabled:scale-100 transition-transform duration-500 disabled:bg-[#ccc]"
                 disabled={!nextValid}
                 onClick={() => setCompletedSteps(prevSteps => [...prevSteps, 2])}
               >
@@ -106,23 +123,7 @@ const TaskPostingForm = () => {
           )}
           {completedSteps.includes(3) && (
             <>
-              <label htmlFor="location" className="flex items-center text-sm mb-2 mt-10">
-                Location
-                <Tooltip title="Your exact address will be kept private and only shared with the accepted helper for this task" placement="right">
-                  <div>
-                    <HiOutlineInformationCircle className="ml-2" size={18} />
-                  </div>
-                </Tooltip>
-              </label>
-              <input
-                required
-                type="text"
-                name="location"
-                id="location"
-                className="rounded h-10 p-2 text-sm border-primary border-[1px]"
-                onChange={e => setLocation(e.target.value)}
-              />
-
+              <PlacesAutocomplete setAddress={setAddress} page="taskposting" />
               <div className="flex w-full mt-10 gap-5 sm:gap-8 lg:gap-12">
                 <div className="flex flex-col w-1/2">
                   <label htmlFor="task-deadline" className="text-sm mb-2">
@@ -132,6 +133,7 @@ const TaskPostingForm = () => {
                     required
                     type="datetime-local"
                     name="task-deadline"
+                    value={date}
                     id="task-deadline"
                     className="rounded h-10 p-2 text-sm border-primary border-[1px]"
                     onChange={e => setDate(e.target.value)}
@@ -145,16 +147,21 @@ const TaskPostingForm = () => {
                     required
                     type="number"
                     name="task-cost"
+                    value={cost}
+                    onFocus={() => setIsFocused(prev => ({ ...prev, cost: true }))}
                     id="task-cost"
-                    className="rounded h-10 p-2 text-sm border-primary border-[1px]"
+                    className={`${
+                      isFocused["cost"] && !isValid["cost"] ? "focus:outline-red-600 border-red-600" : "border-primary"
+                    } rounded h-10 p-2 text-sm border-[1px]`}
                     onChange={e => setCost(e.target.value)}
                   />
+                  {isFocused["cost"] && !isValid["cost"] && (
+                    <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">Cost must be greater than 4</div>
+                  )}
                 </div>
               </div>
-              <label htmlFor="photos" className="mt-10 mb-3 text-sm">
-                Add Photos (optional)
-              </label>
-              <input type="file" name="photos" id="photos" accept="image/*" multiple />
+              <label className="mt-10 mb-3 text-sm">Add Photos (optional)</label>
+              <input type="file" name="photos" id="photos" accept="image/*" multiple className="w-max" />
               <input
                 type="submit"
                 value="Post Task"

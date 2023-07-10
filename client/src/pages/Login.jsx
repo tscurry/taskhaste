@@ -12,6 +12,7 @@ import signUp from "../assets/sign-up-login-task-illustration.svg";
 const Login = () => {
   const [toggle, setFirstToggle] = React.useState(false);
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const formValidation = validator.isEmail(email);
 
@@ -64,6 +65,7 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
+                  value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
                 />
@@ -80,9 +82,11 @@ const Login = () => {
                   className="pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 border-primary w-[375px] h-[35px] rounded-md text-xs border"
                   type="password"
                   name="password"
+                  value={password}
                   id="password"
                   placeholder="Enter your password"
                   required
+                  onChange={e => setPassword(e.target.value)}
                 />
                 <div onClick={togglePassword}>
                   {toggle ? (
@@ -94,7 +98,7 @@ const Login = () => {
               </div>
               <div className="max-xs:w-[295px] max-sm:w-[315px] max-md:w-[415px] flex justify-between w-[370px] mb-[25px] mt-[5px]">
                 <div className="flex">
-                  <input className="mr-[5px]" type="checkbox" name="remember" id="remember" />
+                  <input className="mr-[5px]" type="checkbox" name="remember-me" id="remember-me" />
                   <span className="text-xs text-center">Remember me</span>
                 </div>
                 <span className="underline font-bold text-xs cursor-pointer">Forgot Password?</span>
