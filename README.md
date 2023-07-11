@@ -8,6 +8,7 @@ taskHaste is a task management web application designed to connect users with he
 - Front-end: React.js, Tailwind CSS
 - Backend: (Planned) Node.js, Express.js, Passport.js (for user authentication)
 - Database: (Planned) PostgreSQL
+- Testing: (Planned) Cypress
 - APIs: (Planned) Stripe (for payment processing), Google Maps API (for location-based services)
 
 

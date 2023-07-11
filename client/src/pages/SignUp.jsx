@@ -6,14 +6,15 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import validator from "validator";
+import PasswordChecklist from "react-password-checklist";
 
 import signUp from "../assets/sign-up-login-task-illustration.svg";
 import PlacesAutocomplete from "../components/PlacesAutocomplete";
 
 const SignUp = () => {
   const [displayName, setDisplayName] = React.useState("");
-  const [street, setStreet] = React.useState("");
   const [postalCode, setPostalCode] = React.useState("");
+  const [streetAddress, setStreetAddress] = React.useState("");
   const [city, setCity] = React.useState("");
   const [country, setCountry] = React.useState("");
   const [region, setRegion] = React.useState("");
@@ -21,20 +22,17 @@ const SignUp = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [address, setAddress] = React.useState("");
 
   const [mobileValid, setMobileValid] = React.useState(false);
   const [nameValid, setNameValid] = React.useState(false);
   const [inputType, setInputType] = React.useState({ pass: "password", confirm: "password" });
   const [step, setStep] = React.useState(2);
-  const [passwordMatch, setPasswordMatch] = React.useState(false);
+  const [passwordValid, setPasswordValid] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState({});
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
   const prevStep = () => setStep(prevStep => prevStep - 1);
-
-  React.useEffect(() => {
-    password !== confirmPassword ? setPasswordMatch(false) : setPasswordMatch(true);
-  }, [password, confirmPassword]);
 
   React.useEffect(() => {
     displayName !== "" ? setNameValid(true) : setNameValid(false);
@@ -44,16 +42,22 @@ const SignUp = () => {
     validator.isMobilePhone(mobile, "any") ? setMobileValid(true) : setMobileValid(false);
   }, [mobile]);
 
-  const firstValidation = validator.isEmail(email) && passwordMatch;
+  const firstValidation = validator.isEmail(email) && passwordValid;
 
   const togglePassword = input => {
     setInputType(prev => ({ ...prev, [input]: prev[input] === "password" ? "text" : "password" }));
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    return mobileValid && nameValid && passwordValid && validator.isEmail(email) && address;
+  };
+
   const personalDetaills = () => {
     return (
       <>
-        <div className="flex justify-center items-center flex-col mt-[45px] w-[575px] h-max">
+        <form className="flex justify-center items-center flex-col mt-[45px] w-[575px] h-max" onSubmit={handleSubmit}>
           <h1 className="font-bold text-xl md:text-2xl lg:text-3xl">Almost There</h1>
           <p className="opacity-60 text-center text-sm mb-[30px] mt-[5px]">Enter details to finish sign up</p>
           <label htmlFor="name" className="text-xs font-medium mb-[7px] text-left w-[295px] sm:w-[355px] xl:w-[445px]">
@@ -69,41 +73,31 @@ const SignUp = () => {
               id="name"
               placeholder="Enter your display name"
               onChange={e => setDisplayName(e.target.value)}
+              required
             />
           </div>
           <PlacesAutocomplete
             page="signup"
-            street={street}
             setCity={setCity}
             setCountry={setCountry}
             setPostalCode={setPostalCode}
-            setStreet={setStreet}
             setRegion={setRegion}
+            setStreetAddress={setStreetAddress}
+            streetAddress={streetAddress}
+            setAddress={setAddress}
           />
           <div className="w-[300px] sm:w-[360px] xl:w-[450px] grid grid-cols-1 md:grid-cols-2 gap-5 md:mt-[15px]">
             <div className="grid col-span-1 w-full mt-[15px] md:mt-0">
               <label htmlFor="city" className="font-medium text-xs text-left mb-[7px]">
                 City
               </label>
-              <input
-                type="text"
-                name="city"
-                defaultValue={city}
-                placeholder="Enter city"
-                className="border-primary h-[35px] text-xs rounded-md border px-2"
-              />
+              <input type="text" name="city" value={city} disabled className="border-primary h-[35px] text-xs rounded-md border px-2" />
             </div>
             <div className="w-full grid col-span-1">
               <label htmlFor="region" className="font-medium text-xs text-left mb-[7px]">
                 Province/State
               </label>
-              <input
-                type="text"
-                name="region"
-                defaultValue={region}
-                placeholder="Enter province/state"
-                className="border-primary h-[35px] text-xs rounded-md border px-2"
-              />
+              <input type="text" name="region" value={region} disabled className="border-primary h-[35px] text-xs rounded-md border px-2" />
             </div>
           </div>
           <div className="w-[300px] sm:w-[360px] xl:w-[450px] grid grid-cols-1 md:grid-cols-2 md:mt-[15px] gap-5 ">
@@ -111,25 +105,13 @@ const SignUp = () => {
               <label htmlFor="city" className="font-medium text-xs text-left mb-[7px]">
                 Postal/Zip Code
               </label>
-              <input
-                type="text"
-                name="postal-code"
-                defaultValue={postalCode}
-                placeholder="Enter postal/zip code"
-                className="border-primary h-[35px] text-xs rounded-md border px-2"
-              />
+              <input type="text" name="postal-code" value={postalCode} disabled className="border-primary h-[35px] text-xs rounded-md border px-2" />
             </div>
             <div className="w-full grid col-span-1">
               <label htmlFor="country" className="font-medium text-xs text-left mb-[7px]">
                 Country
               </label>
-              <input
-                type="text"
-                name="country"
-                defaultValue={country}
-                placeholder="Enter country"
-                className="border-primary h-[35px] text-xs rounded-md border px-2"
-              />
+              <input type="text" name="country" value={country} disabled className="border-primary h-[35px] text-xs rounded-md border px-2" />
             </div>
           </div>
           <div className="mt-[15px]">
@@ -146,6 +128,7 @@ const SignUp = () => {
                 value={mobile}
                 placeholder="Enter your mobile number"
                 onChange={e => setMobile(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -153,11 +136,7 @@ const SignUp = () => {
             <button onClick={prevStep} className="w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs">
               Previous
             </button>
-            <button
-              disabled={!mobileValid || !nameValid}
-              className="disabled:bg-[#ccc] w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs"
-              type="submit"
-            >
+            <button className="disabled:bg-[#ccc] w-1/2 border rounded-md h-[35px] bg-primary text-white text-xs" type="submit">
               Sign up
             </button>
           </div>
@@ -165,7 +144,7 @@ const SignUp = () => {
             <div className={`w-[50px] h-1 ${step === 1 ? "bg-primary" : "bg-background"} rounded-lg mr-2`}></div>
             <div className={`w-[50px] h-1 ${step === 2 ? "bg-primary" : "bg-background"} rounded-lg ml-2`}></div>
           </div>
-        </div>
+        </form>
       </>
     );
   };
@@ -242,6 +221,7 @@ const SignUp = () => {
                     id="password"
                     value={password}
                     placeholder="Enter your password"
+                    onFocus={() => setIsFocused(prev => ({ ...prev, password: true }))}
                     required
                     onChange={e => setPassword(e.target.value)}
                   />
@@ -253,6 +233,18 @@ const SignUp = () => {
                     )}
                   </div>
                 </div>
+                <div className={`${isFocused["password"] ? "flex" : "hidden"} mb-[20px] text-xs -ml-[70px] xs:-ml-[90px] sm:-ml-[185px] md:-ml-36`}>
+                  {isFocused["password"] && (
+                    <PasswordChecklist
+                      onChange={isValid => setPasswordValid(isValid)}
+                      minLength={8}
+                      valueAgain={confirmPassword}
+                      value={password}
+                      rules={["minLength", "specialChar", "capital", "number", "match"]}
+                      iconSize={15}
+                    />
+                  )}
+                </div>
                 <label
                   htmlFor="confirm-password"
                   className="max-xs:w-[295px] max-sm:w-[315px] max-md:w-[415px] text-xs font-medium mb-[7px] w-[370px] text-left"
@@ -260,15 +252,9 @@ const SignUp = () => {
                   Confirm Password
                 </label>
                 <div className="relative">
-                  <RiLockPasswordFill
-                    className={`${
-                      isFocused["confirm-password"] && !passwordMatch ? "top-1/3 -translate-y-1/2" : "top-1/2 -translate-y-1/2"
-                    } absolute left-2  transform`}
-                  />
+                  <RiLockPasswordFill className="top-1/2 -translate-y-1/2 absolute left-2 transform" />
                   <input
-                    className={`${
-                      isFocused["confirm-password"] && !passwordMatch ? "focus:outline-red-600 border-red-600" : "border-primary"
-                    } pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 w-[375px] h-[35px] rounded-md  text-xs border-[1px]`}
+                    className="pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 w-[375px] h-[35px] rounded-md border-primary text-xs border-[1px]"
                     type={inputType.confirm}
                     name="confirm-password"
                     id="confirm-password"
@@ -280,22 +266,11 @@ const SignUp = () => {
                   />
                   <div onClick={() => togglePassword("confirm")}>
                     {inputType.confirm !== "password" ? (
-                      <AiFillEye
-                        className={`${
-                          isFocused["confirm-password"] && !passwordMatch ? "top-1/3" : "top-1/2"
-                        } absolute right-2 transform -translate-y-1/2`}
-                      />
+                      <AiFillEye className="top-1/2 absolute right-2 transform -translate-y-1/2" />
                     ) : (
-                      <AiFillEyeInvisible
-                        className={`${
-                          isFocused["confirm-password"] && !passwordMatch ? "top-1/3" : "top-1/2"
-                        } absolute right-2 transform -translate-y-1/2`}
-                      />
+                      <AiFillEyeInvisible className="top-1/2 absolute right-2 transform -translate-y-1/2" />
                     )}
                   </div>
-                  {isFocused["confirm-password"] && !passwordMatch && (
-                    <div className="pt-0.5 pl-0.5 text-xs text-red-600">Passwords do not match</div>
-                  )}
                 </div>
 
                 <button

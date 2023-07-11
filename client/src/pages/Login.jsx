@@ -13,8 +13,9 @@ const Login = () => {
   const [toggle, setFirstToggle] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isFocused, setIsFocused] = React.useState({});
 
-  const formValidation = validator.isEmail(email);
+  const formValidation = validator.isEmail(email) && password !== "";
 
   const togglePassword = () => {
     setFirstToggle(!toggle);
@@ -57,18 +58,28 @@ const Login = () => {
               <label htmlFor="email" className="max-xs:w-[295px] max-sm:w-[315px] max-md:w-[415px] text-xs font-medium mb-[7px] w-[370px] text-left">
                 Email
               </label>
-              <div className="relative mb-[25px]">
-                <MdEmail className="absolute left-2 top-1/2 -translate-y-1/2 transform" />
+              <div className={`relative ${isFocused["email"] && !validator.isEmail(email) ? "" : "mb-[25px]"}`}>
+                <MdEmail
+                  className={`${
+                    isFocused["email"] && !validator.isEmail(email) ? "top-1/3 -translate-y-[85%]" : "top-1/2 -translate-y-1/2"
+                  } absolute left-2  transform`}
+                />
                 <input
-                  className="pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 border-primary w-[375px] h-[35px] rounded-md text-xs border"
+                  className={`${
+                    isFocused["email"] && !validator.isEmail(email) ? "focus:outline-red-600 border-red-600" : "border-primary"
+                  } pl-8 max-xs:w-[300px] max-sm:w-[320px] max-md:w-[420px] pr-2 w-[375px] h-[35px] rounded-md text-xs border`}
                   type="text"
                   name="email"
                   id="email"
                   placeholder="Enter your email address"
                   value={email}
+                  onFocus={() => setIsFocused(prev => ({ ...prev, email: true }))}
                   onChange={e => setEmail(e.target.value)}
                   required
                 />
+                {isFocused["email"] && !validator.isEmail(email) && (
+                  <div className="pt-0.5 pl-0.5 text-xs mb-4 text-red-600 text-left">Not a valid email address</div>
+                )}
               </div>
               <label
                 htmlFor="password"
