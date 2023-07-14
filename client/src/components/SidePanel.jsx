@@ -14,13 +14,11 @@ const SidePanel = () => {
 
   const handleNavigation = option => {
     setView(option);
-    navigate(`/${option}`);
+    navigate(`${option}`);
   };
 
   return (
     <>
-      {/* <AuthenticatedHeader /> */}
-
       <nav className="fixed h-screen lg:w-[17%] w-[13%] lg:pt-[100px] pt-[125px] mr-[200px]">
         <div className="hidden lg:flex lg:mb-[75px] items-center flex-col">
           <img className="mb-[10px] mt-10 h-24 w-24 rounded-full" src={user} alt="user " />

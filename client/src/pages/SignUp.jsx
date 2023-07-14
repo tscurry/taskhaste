@@ -5,6 +5,7 @@ import { BsApple, BsFillPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import validator from "validator";
 import PasswordChecklist from "react-password-checklist";
 
@@ -27,9 +28,11 @@ const SignUp = () => {
   const [mobileValid, setMobileValid] = React.useState(false);
   const [nameValid, setNameValid] = React.useState(false);
   const [inputType, setInputType] = React.useState({ pass: "password", confirm: "password" });
-  const [step, setStep] = React.useState(2);
+  const [step, setStep] = React.useState(1);
   const [passwordValid, setPasswordValid] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState({});
+
+  const navigate = useNavigate();
 
   const nextStep = () => setStep(prevStep => prevStep + 1);
   const prevStep = () => setStep(prevStep => prevStep - 1);
@@ -283,7 +286,9 @@ const SignUp = () => {
                 </button>
                 <div className="flex mt-[7px]">
                   <span className="opacity-60 text-xs">Already have an account?</span>
-                  <p className="ml-[5px] font-semibold underline text-xs cursor-pointer">Sign in</p>
+                  <p className="ml-[5px] font-semibold underline text-xs cursor-pointer" onClick={() => navigate("/login")}>
+                    Sign in
+                  </p>
                 </div>
                 <div className="flex items-center mb-4 mt-[20px]">
                   <div className={`w-[50px] h-1 ${step === 1 ? "bg-primary" : "bg-background"} rounded-lg mr-2`}></div>

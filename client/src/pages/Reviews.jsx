@@ -20,36 +20,66 @@ const Reviews = () => {
           </div>
           <div className="col-span-1 px-4 my-auto">
             <div className="flex items-center">
-              <AiFillStar color="gold" className="mr-1 text-xs" />
-              <p className="text-xs mr-1">5</p>
+              <div className="flex items-center max-sm:visible sm:hidden">
+                <p className="text-xs mr-1">5</p>
+                <AiFillStar color="gold" className="mr-1 text-xs" />
+              </div>
+              <div className="flex items-center max-sm:hidden">
+                <Rating readOnly value={5} size="small" />
+              </div>
+              <p className="text-sm ml-2">5,657</p>
             </div>
             <div className="flex items-center">
-              <AiFillStar color="gold" className="mr-1 text-xs" />
-              <p className="text-xs mr-1">4</p>
+              <div className="flex items-center max-sm:visible sm:hidden">
+                <p className="text-xs mr-1">4</p>
+                <AiFillStar color="gold" className="mr-1 text-xs" />
+              </div>
+              <div className="flex items-center max-sm:hidden">
+                <Rating readOnly value={4} size="small" />
+              </div>
+              <p className="text-sm ml-2">4,128</p>
             </div>
             <div className="flex items-center">
-              <AiFillStar color="gold" className="mr-1 text-xs" />
-              <p className="text-xs mr-1">3</p>
+              <div className="flex items-center max-sm:visible sm:hidden">
+                <p className="text-xs mr-1">3</p>
+                <AiFillStar color="gold" className="mr-1 text-xs" />
+              </div>
+              <div className="flex items-center max-sm:hidden">
+                <Rating readOnly value={3} size="small" />
+              </div>
+              <p className="text-sm ml-2">456</p>
             </div>
             <div className="flex items-center">
-              <AiFillStar color="gold" className="mr-1 text-xs" />
-              <p className="text-xs mr-1">2</p>
+              <div className="flex items-center max-sm:visible sm:hidden">
+                <p className="text-xs mr-1">2</p>
+                <AiFillStar color="gold" className="mr-1 text-xs" />
+              </div>
+              <div className="flex items-center max-sm:hidden">
+                <Rating readOnly value={2} size="small" />
+              </div>
+              <p className="text-sm ml-2">56</p>
             </div>
             <div className="flex items-center">
-              <AiFillStar color="gold" className="mr-1 text-xs" />
-              <p className="text-xs mr-1">1</p>
+              <div className="flex items-center max-sm:visible sm:hidden">
+                <p className="text-xs mr-1">1</p>
+                <AiFillStar color="gold" className="mr-1 text-xs" />
+              </div>
+              <div className="flex items-center max-sm:hidden">
+                <Rating readOnly value={1} size="small" />
+              </div>
+              <p className="text-sm ml-2">6</p>
             </div>
           </div>
         </div>
         {Array(5)
           .fill()
           .map((_, index) => (
-            <div className="my-10 flex pb-10 border-b-[2px] items-center flex-wrap md:flex-nowrap">
+            <div className="my-10 flex pb-10 border-b-[2px] items-center flex-wrap md:flex-nowrap" key={index}>
               <img src={sample} alt="profile pic" className="rounded-xl h-[100px]" />
               <div className="ml-8">
                 <p className="font-medium text-sm md:text-base">Alexandria Mason</p>
                 <Rating value={2} precision={1} readOnly size="small" className="my-2" />
-                <p className="opacity-60 text-sm md:text-base">24-02-2022</p>
+                <p className="opacity-60 text-sm">24-02-2022</p>
               </div>
               <div className="review mt-5 md:ml-[100px]">
                 <p className="break-words text-sm lg:text-base">

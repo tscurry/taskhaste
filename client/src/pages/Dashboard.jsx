@@ -10,11 +10,11 @@ const Dashboard = () => {
   const dates = ["Jun 15, 2021", "May 2, 2019", "Oct 18, 2023"];
   const type = ["Shopping & Delivery", "Landscaping", "Indoor Chores & Personal Assistance"];
 
-  const activities = title.map((title, index) => ({
+  const activities = title.map((title, key) => ({
     title,
-    type: type[index],
-    date: dates[index],
-    status: status[index],
+    type: type[key],
+    date: dates[key],
+    status: status[key],
   }));
 
   return (
@@ -50,8 +50,8 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {Array(10)
               .fill()
-              .map((_, index) => (
-                <div className="rounded-xl bg-background">
+              .map((_, key) => (
+                <div className="rounded-xl bg-background" key={key}>
                   <div className="flex p-5 items-center">
                     <img src={img} alt="active tasks" className="w-[65px] rounded-lg" />
                     <div className="mx-5 my-auto">

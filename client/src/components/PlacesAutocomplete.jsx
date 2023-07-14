@@ -9,7 +9,7 @@ const libraries = ["places"];
 
 const PlacesAutocomplete = props => {
   const [isValid, setIsValid] = React.useState(false);
-  const [isFocused, setIsFocused] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState({});
   const [errorMessage, setErrorMessage] = React.useState(null);
   const [visible, setVisible] = React.useState(false);
   const [dummy, setDummy] = React.useState("");
@@ -102,17 +102,13 @@ const PlacesAutocomplete = props => {
             type="text"
             name="address"
             id="autocomplete"
-            onFocus={() => setIsFocused(true)}
+            onFocus={() => setIsFocused(prev => ({ ...prev, address: true }))}
             placeholder="Search for address"
             className={`${
-              isFocused && !isValid ? "focus:outline-red-600 border-red-600" : "border-primary"
+              isFocused["address"] && !isValid ? "focus:outline-red-600 border-red-600" : "border-primary"
             } bg-white rounded h-10 p-2 text-sm border-[1px]`}
           />
-          {errorMessage ? (
-            <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>
-          ) : (
-            isFocused && !isValid && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">Invalid address</div>
-          )}
+          {errorMessage && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>}
         </>
       ) : (
         <>
@@ -124,7 +120,7 @@ const PlacesAutocomplete = props => {
             <input
               ref={autoCompleteInput}
               className={`${
-                isFocused && !isValid ? "focus:outline-red-600 border-red-600" : "border-primary"
+                isFocused["address-signup"] && !isValid ? "focus:outline-red-600 border-red-600" : "border-primary"
               } h-[35px] text-xs rounded-md border w-[300px] sm:w-[360px] xl:w-[450px] pl-8 pr-2"
               `}
               type="text"
@@ -132,10 +128,11 @@ const PlacesAutocomplete = props => {
               id="address-signup"
               value={`${!props.streetAddress ? dummy : props.streetAddress}`}
               placeholder="Please enter your address to autofill"
+              onFocus={() => setIsFocused(prev => ({ ...prev, "address-signup": true }))}
               onChange={e => setDummy(e.target.value)}
               required
             />
-            {visible && document.getElementById("address-signup").value.length > 0 && (
+            {visible && isFocused["address-signup"] && (
               <IoIosCloseCircle
                 className="absolute right-2 top-1/2 -translate-y-1/2 transform"
                 onClick={() => {
@@ -146,11 +143,7 @@ const PlacesAutocomplete = props => {
               />
             )}
           </div>
-          {errorMessage ? (
-            <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>
-          ) : (
-            isFocused && !isValid && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">Invalid address</div>
-          )}
+          {errorMessage && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>}
         </>
       )}
     </>

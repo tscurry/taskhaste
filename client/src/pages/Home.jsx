@@ -1,7 +1,10 @@
 import * as React from "react";
 import { HomeHeader } from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <HomeHeader />
@@ -9,10 +12,16 @@ const Home = () => {
         <h1 className="max-sm:text-[30px] max-xs:text-[20px] text-[40px] font-bold">Accelerating Your To-Do List</h1>
         <p className="max-sm:text-base max-xs:text-xs mt-3 text-lg">Connect with reliable helpers to tackle your to-do list.</p>
         <div className="mt-8">
-          <button className="bg-primary border rounded h-[40px] text-sm text-center text-white w-[120px] sm:mr-[25px] max-xs:w-[100px] max-xs:text-xs max-sm:mr-[15px] transition ease-in-out hover:scale-[105%] hover:bg-white hover:text-black duration-300 hover:border-primary">
+          <button
+            className="bg-primary border rounded h-[40px] text-sm text-center text-white w-[120px] sm:mr-[25px] max-xs:w-[100px] max-xs:text-xs max-sm:mr-[15px] transition ease-in-out hover:scale-[105%] hover:bg-white hover:text-black duration-300 hover:border-primary"
+            onClick={() => navigate("/signup")}
+          >
             Post a Task
           </button>
-          <button className="bg-primary border rounded h-[40px] text-sm text-center text-white w-[120px] sm:ml-[25px] max-xs:w-[100px] max-xs:text-xs transition ease-in-out hover:scale-[105%] hover:bg-white hover:text-black duration-300 hover:border-primary">
+          <button
+            className="bg-primary border rounded h-[40px] text-sm text-center text-white w-[120px] sm:ml-[25px] max-xs:w-[100px] max-xs:text-xs transition ease-in-out hover:scale-[105%] hover:bg-white hover:text-black duration-300 hover:border-primary"
+            onClick={() => navigate("/tasks")}
+          >
             Find Tasks
           </button>
         </div>

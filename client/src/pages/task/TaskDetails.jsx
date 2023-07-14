@@ -2,8 +2,11 @@ import * as React from "react";
 import { Rating } from "@mui/material";
 
 import sample from "../../assets/sample.jpg";
+import { useNavigate } from "react-router-dom";
 
 const TaskDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white">
       <div className="lg:mx-12 mx-5 py-[50px]">
@@ -31,7 +34,10 @@ const TaskDetails = () => {
           <span className="font-bold mr-2">Payment:</span>
           <span>$20/hr</span>
         </div>
-        <button className="text-sm my-6 hover:scale-[105%] transition-transform duration-500 bg-primary text-white rounded p-4 shadow-lg">
+        <button
+          className="text-sm my-6 hover:scale-[105%] transition-transform duration-500 bg-primary text-white rounded p-4 shadow-lg"
+          onClick={() => navigate("/:userId/tasks/post-a-task")}
+        >
           Start Task
         </button>
         <hr className="w-full border-primary opacity-50" />
@@ -60,7 +66,7 @@ const TaskDetails = () => {
           {Array(10)
             .fill()
             .map((_, index) => (
-              <div className="review-card p-5 bg-background rounded-lg w-full my-[40px]">
+              <div className="review-card p-5 bg-background rounded-lg w-full my-[40px]" key={index}>
                 <div className="flex items-end gap-2 mb-2">
                   <img src={sample} alt="avatar" className="rounded-full w-9" />
                   <p>John Delton</p>

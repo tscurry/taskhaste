@@ -1,8 +1,15 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { AccountSettings, PaymentSettings, NotificationSettings } from "./index";
 
 const Settings = () => {
   const [view, setView] = React.useState("account");
+  const navigate = useNavigate();
+
+  const renderView = option => {
+    setView(option);
+    navigate(`/:userId/settings/${option}`);
+  };
 
   return (
     <div className="bg-white h-full mb-[50px]">
@@ -11,7 +18,7 @@ const Settings = () => {
         <hr className="w-full border-primary opacity-50 mb-5" />
         <div className="nav flex md:gap-6">
           <button
-            onClick={() => setView("account")}
+            onClick={() => renderView("account")}
             className={`${
               view === "account" ? "bg-primary text-white scale-100" : "hover:scale-[105%]"
             } transition-transform duration-500 text-sm px-5 py-1 rounded-md`}
@@ -19,7 +26,7 @@ const Settings = () => {
             Account
           </button>
           <button
-            onClick={() => setView("notifications")}
+            onClick={() => renderView("notifications")}
             className={`${
               view === "notifications" ? "bg-primary text-white scale-100" : "hover:scale-[105%]"
             } transition-transform duration-500 text-sm px-5 py-1 rounded-md`}
@@ -27,7 +34,7 @@ const Settings = () => {
             Notifications
           </button>
           <button
-            onClick={() => setView("payment")}
+            onClick={() => renderView("payment")}
             className={`${
               view === "payment" ? "bg-primary text-white scale-100" : "hover:scale-[105%]"
             } transition-transform duration-500 text-sm cursor-pointer px-5 py-1 rounded-md`}

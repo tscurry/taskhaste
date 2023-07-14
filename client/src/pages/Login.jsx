@@ -5,6 +5,7 @@ import { BsApple } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import validator from "validator";
 
 import signUp from "../assets/sign-up-login-task-illustration.svg";
@@ -14,6 +15,8 @@ const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isFocused, setIsFocused] = React.useState({});
+
+  const navigate = useNavigate();
 
   const formValidation = validator.isEmail(email) && password !== "";
 
@@ -123,7 +126,9 @@ const Login = () => {
               </button>
               <div className="flex mt-[7px]">
                 <span className="opacity-60 text-xs">Don't have an account?</span>
-                <p className="ml-[5px] font-semibold underline text-xs cursor-pointer">Create an account</p>
+                <p className="ml-[5px] font-semibold underline text-xs cursor-pointer" onClick={() => navigate("/signup")}>
+                  Create an account
+                </p>
               </div>
             </div>
             <div>
