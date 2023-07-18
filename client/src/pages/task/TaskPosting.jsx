@@ -7,9 +7,9 @@ const CATEGORIES = ["Shopping & Delivery", "Indoor Chores & Personal Assistance"
 const TaskPostingForm = () => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [title, setTitle] = React.useState("");
-  const [address, setAddress] = React.useState(null);
-  const [date, setDate] = React.useState(null);
-  const [cost, setCost] = React.useState(null);
+  const [address, setAddress] = React.useState("");
+  const [date, setDate] = React.useState("");
+  const [cost, setCost] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [completedSteps, setCompletedSteps] = React.useState([1]);
 

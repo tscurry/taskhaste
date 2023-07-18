@@ -26,8 +26,8 @@ const Home = () => {
           </button>
         </div>
       </section>
-      <section className="cta-illustrations ">
-        <div className="flex gap-[250px] mx-auto mt-[50px] w-full h-[500px] max-xl:gap-[200px] max-xl:justify-center max-xl:h-[400px] max-lg:h-full max-xs:h-[420px] max-xs:w-screen">
+      <section className="cta-illustrations">
+        <div className="flex gap-[250px] mx-auto mt-[50px] w-full h-[500px] max-xl:gap-[200px] max-xl:justify-center max-xl:h-[400px] max-lg:h-full max-xs:h-[420px] max-xs:w-screen 3xl:justify-center">
           <div className="bg-task-done bg-contain bg-no-repeat h-[600px] relative left-[100px] w-[500px] max-xl:w-[400px] max-lg:hidden"></div>
           <div className="flex gap-[25px] items-center w-[600px] max-sm:items-center max-sm:gap-[15px] max-2xl:w-[550px] max-xl:h-[230px] max-xl:w-[500px] max-xs:w-max max-xs:flex-wrap max-xs:px-[10px] max-sm:justify-center">
             <div className="shadow-lg h-[220px] w-[170px] flex justify-center bg-coral border rounded-[15px] items-center flex-col max-sm:w-[150px] max-sm:h-[200px] max-xs:w-[40%]">
@@ -48,9 +48,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="categories px-11 max-sm:px-5 my-[75px]">
-        <h2 className="font-bold text-[22px] max-lg:text-[20px] max-sm:text-lg underline">Discover Categories</h2>
-        <div className="flex justify-center items-center flex-wrap gap-[20px] mt-[50px]">
+      <section className="categories px-11 max-sm:px-5 my-[75px] ">
+        <h2 className="font-bold text-[22px] max-lg:text-[20px] max-sm:text-lg underline 3xl:flex 3xl:items-center 3xl:justify-center">Discover Categories</h2>
+        <div className="flex justify-center items-center flex-wrap gap-[20px] mt-[50px] 3xl:gap-24">
           <div className="transition ease-in-out hover:border-primary hover:shadow-2xl hover:scale-[110%] flex flex-col border-[2px] rounded border-white p-[20px] ">
             <div className="bg-landscaping h-[200px] w-[200px] bg-slate-200"></div>
             <h2 className="text-center text-[14px]">Landscaping</h2>

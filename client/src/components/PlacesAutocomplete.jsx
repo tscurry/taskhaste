@@ -36,7 +36,6 @@ const PlacesAutocomplete = props => {
     }
 
     if (isLoaded && window.google) {
-      console.log(autoCompleteInput);
       const autocomplete = new window.google.maps.places.Autocomplete(autoCompleteInput.current, { componentRestrictions: { country: "ca" } });
 
       autoCompleteInput.current.addEventListener("input", () => {
@@ -44,11 +43,18 @@ const PlacesAutocomplete = props => {
         if (typeof props.setAddress === "function") {
           props.setAddress(null);
         }
+
+        if (typeof props.settingsSetAddress === "function") {
+          props.settingsSetAddress(null);
+        }
         setIsValid(false);
       });
 
       autocomplete.addListener("place_changed", () => {
-        resetAddress();
+        if (props.page !== "taskposting" && props.page !== "settings") {
+          resetAddress();
+        }
+
         const place = autocomplete.getPlace();
         let streetNum, streetName;
 
@@ -58,7 +64,8 @@ const PlacesAutocomplete = props => {
 
           props.page === "taskposting"
             ? props.setAddress(place.formatted_address)
-            : place.address_components.forEach(address => {
+            : props.page === "signup"
+            ? place.address_components.forEach(address => {
                 let addressType = address.types;
 
                 props.setAddress(place.formatted_address);
@@ -73,11 +80,11 @@ const PlacesAutocomplete = props => {
 
                 if (addressType.includes("locality") && typeof props.setCity === "function") props.setCity(address.long_name);
                 else if (addressType.includes("postal_town") && typeof props.setCity === "function") props.setCity(address.long_name);
-              });
 
-          if (streetName) {
-            streetNum ? props.setStreetAddress(`${streetNum} ${streetName}`) : props.setStreetAddress(`${streetName}`);
-          }
+                if (typeof props.setStreetAddress === "function" && streetName)
+                  streetNum ? props.setStreetAddress(`${streetNum} ${streetName}`) : props.setStreetAddress(`${streetName}`);
+              })
+            : props.settingsSetAddress(place.formatted_address);
         }
       });
     }
@@ -110,7 +117,7 @@ const PlacesAutocomplete = props => {
           />
           {errorMessage && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>}
         </>
-      ) : (
+      ) : props.page === "signup" ? (
         <>
           <label htmlFor="address" className="w-[295px] sm:w-[355px] xl:w-[445px] text-xs font-medium mb-[7px] text-left">
             Address
@@ -144,6 +151,27 @@ const PlacesAutocomplete = props => {
             )}
           </div>
           {errorMessage && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>}
+        </>
+      ) : (
+        <>
+          <div className="flex flex-col md:w-[500px] ">
+            <label htmlFor="address" className="mt-7 mb-3">
+              Address
+            </label>
+            <input
+              ref={autoCompleteInput}
+              type="text"
+              name="address-settings"
+              id="address-settings"
+              onFocus={() => setIsFocused(prev => ({ ...prev, "address-settings": true }))}
+              placeholder="Search for address"
+              className={`${
+                isFocused["address-settings"] && !isValid ? "focus:outline-red-600 border-red-600" : "border-primary"
+              } border rounded p-2 text-sm`}
+              required
+            />
+            {errorMessage && <div className="pt-1 pl-0.5 md:text-sm text-xs text-red-600">{errorMessage}</div>}
+          </div>
         </>
       )}
     </>

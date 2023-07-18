@@ -5,16 +5,37 @@ import { AiFillStar } from "react-icons/ai";
 import { BsCheck2Square } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
+import { Modal, Fade, Box } from "@mui/material";
 
 import user from "../assets/sample.jpg";
 
 const SidePanel = () => {
   const [view, setView] = React.useState("dashboard");
+  const [modalOpen, setModalOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const handleNavigation = option => {
     setView(option);
     navigate(`${option}`);
+  };
+
+  const EditProfilePicture = () => {
+    return (
+      <div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <Fade in={modalOpen}>
+            <Box className="absolute p-6 bg-white left-[50%] top-[50%] rounded-lg shadow-lg">
+              <p className="text-xl font-bold mb-5">Are you sure you want to delete?</p>
+              <p className="text-xs">Once deleted this cannot be undone</p>
+              <div className="flex justify-between mt-5">
+                <button className="text-center">Cancel</button>
+                <button className="text-[#ff0000]">Delete</button>
+              </div>
+            </Box>
+          </Fade>
+        </Modal>
+      </div>
+    );
   };
 
   return (
@@ -23,10 +44,14 @@ const SidePanel = () => {
         <div className="hidden lg:flex lg:mb-[75px] items-center flex-col">
           <img className="mb-[10px] mt-10 h-24 w-24 rounded-full" src={user} alt="user " />
           <p className="mb-[10px]">Joshua Williams</p>
-          <button className="w-[90px] text-sm h-[25px] rounded bg-primary text-white hover:scale-[105%] transition-transform duration-500 ">
+          <button
+            className="w-[90px] text-sm h-[25px] rounded bg-primary text-white hover:scale-[105%] transition-transform duration-500"
+            onClick={() => setModalOpen(true)}
+          >
             Edit
           </button>
         </div>
+        <EditProfilePicture />
         <div className="flex flex-col items-center">
           <div
             onClick={() => handleNavigation("dashboard")}

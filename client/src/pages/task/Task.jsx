@@ -56,7 +56,7 @@ export const Task = () => {
           </button>
           <button className={`${!auth ? "bg-white" : "bg-gray-300"} p-1 rounded-xl text-sm w-[100px] font-bold`}>Location</button>
         </div>
-        <div className="mt-[50px] mx-2 lg:mx-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
+        <div className="mt-[50px] mx-2 lg:mx-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-10 3xl:gap-20">
           {Array(20)
             .fill()
             .map((_, index) => (

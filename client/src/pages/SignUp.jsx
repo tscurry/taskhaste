@@ -42,7 +42,7 @@ const SignUp = () => {
   }, [displayName]);
 
   React.useEffect(() => {
-    validator.isMobilePhone(mobile, "any") ? setMobileValid(true) : setMobileValid(false);
+    validator.isMobilePhone(mobile, "en-CA") ? setMobileValid(true) : setMobileValid(false);
   }, [mobile]);
 
   const firstValidation = validator.isEmail(email) && passwordValid;
