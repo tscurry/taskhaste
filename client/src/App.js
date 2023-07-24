@@ -46,7 +46,7 @@ const App = () => {
               <Route path="dashboard" element={<Wrapper component={Dashboard} />} />
               <Route path="/:userId/settings" element={<Wrapper component={Settings} />} />
               <Route path="/:userId/settings/account" element={<Wrapper component={Settings} />} />
-              <Route path="/:userId/settings/notifications" element={<Wrapper component={Settings} />} />
+              {/* <Route path="/:userId/settings/notifications" element={<Wrapper component={Settings} />} /> */}
               <Route path="/:userId/settings/payment" element={<Wrapper component={Settings} />} />
               <Route path="reviews" element={<Wrapper component={Reviews} />} />
               <Route path="logout" element={<Wrapper component={Logout} />} />

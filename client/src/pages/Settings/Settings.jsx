@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { AccountSettings, PaymentSettings, NotificationSettings } from "./index";
+import { AccountSettings, PaymentSettings } from "./index";
 
 const Settings = () => {
   const [view, setView] = React.useState("account");
@@ -25,14 +25,14 @@ const Settings = () => {
           >
             Account
           </button>
-          <button
+          {/* <button
             onClick={() => renderView("notifications")}
             className={`${
               view === "notifications" ? "bg-primary text-white scale-100" : "hover:scale-[105%]"
             } transition-transform duration-500 text-sm px-5 py-1 rounded-md`}
           >
             Notifications
-          </button>
+          </button> */}
           <button
             onClick={() => renderView("payment")}
             className={`${
@@ -43,7 +43,7 @@ const Settings = () => {
           </button>
         </div>
         {view === "account" && <AccountSettings />}
-        {view === "notifications" && <NotificationSettings />}
+        {/* {view === "notifications" && <NotificationSettings />} */}
         {view === "payment" && <PaymentSettings />}
       </div>
     </div>

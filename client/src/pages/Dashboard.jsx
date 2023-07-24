@@ -67,10 +67,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="rounded-xl bg-background p-5 w-full">
-          <div className="flex justify-between mb-5 text-sm md:text-base">
-            <h2 className="font-medium">Recent Activity</h2>
-            <p className="text-orange cursor-pointer hover:underline">View All</p>
-          </div>
+          <h2 className="font-bold mb-5 text-sm md:text-base text-center">Recent Activity</h2>
           <hr className="w-full border-primary opacity-50 mb-5" />
           <div className="grid grid-cols-4 text-xs md:text-sm mb-5">
             <h2 className="font-bold px-2 col-span-1">Title</h2>
@@ -82,7 +79,7 @@ const Dashboard = () => {
           {activities.map((activity, index) => (
             <div key={index} className="grid grid-cols-4 text-xs md:text-sm">
               <p className="whitespace-normal break-words col-span-1">{activity.title}</p>
-              <p className="col-span-1">{activity.type}</p>
+              <p className="col-span-1 break-words">{activity.type}</p>
               <p className="col-span-1">{activity.date}</p>
               <div className={`${activity.status === "Completed" ? "bg-[#008000]" : "bg-[#FFA500]"} rounded-lg p-1 md:w-[120px] h-max col-span-1`}>
                 <p className="text-[8px] sm:text-xs text-center text-white">{activity.status}</p>
