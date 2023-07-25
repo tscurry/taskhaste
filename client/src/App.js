@@ -2,9 +2,11 @@ import * as React from "react";
 import { BrowserRouter, useNavigate, Outlet, Route, Routes } from "react-router-dom";
 import { Task, Dashboard, Settings, Reviews, SignUp, Login, Home, TaskDetails, TaskPosting } from "./pages/index";
 import { Logout, SidePanel, AuthenticatedHeader } from "./components/index";
+import ForgetPassword from "./pages/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const App = () => {
-  const auth = true;
+  const auth = false;
 
   const MainWrapper = () => {
     const navigate = useNavigate();
@@ -58,6 +60,8 @@ const App = () => {
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             <Route path="tasks" element={<Task />} />
+            <Route path="forget-password" element={<ForgetPassword />} />
+            <Route path="reset-password" element={<ResetPassword />} />
             <Route path="tasks/:taskId" element={<TaskDetails />} />
           </>
         )}

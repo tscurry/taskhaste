@@ -155,7 +155,7 @@ const SignUp = () => {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="p-[30px] bg-white w-[1200px] rounded-[20px] max-xl:w-[800px] max-md:w-[500px] max-sm:w-[400px] max-xs:w-[360px] h-max my-10">
+        <div className="p-[30px] bg-white w-[1200px] rounded-[20px] max-xl:w-[800px] max-md:w-[500px] max-sm:w-[400px] max-xs:w-[360px] h-max my-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
           <div className="flex">
             <FaRunning className="mr-[5px] h-[30px] w-[40px] max-md:h[20px] max-md:w-[20px]" />
             <h1 className="font-bold text-xl md:text-2xl">taskhaste</h1>

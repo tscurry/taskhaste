@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="p-[30px] bg-white w-[1200px] h-[750px] rounded-[20px] max-xl:w-[800px] max-md:w-[500px] max-sm:w-[400px] max-xs:w-[360px] max-xs:h-[700px]">
+        <div className="p-[30px] bg-white w-[1200px] h-[750px] rounded-[20px] max-xl:w-[800px] max-md:w-[500px] max-sm:w-[400px] max-xs:w-[360px] max-xs:h-[700px] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
           <div className="flex">
             <FaRunning className="mr-[5px] h-[30px] w-[40px] max-md:h[20px] max-md:w-[20px]" />
             <h1 className="font-bold text-3xl max-md:text-2xl">taskhaste</h1>
@@ -115,7 +115,9 @@ const Login = () => {
                   <input className="mr-[5px]" type="checkbox" name="remember-me" id="remember-me" />
                   <span className="text-xs text-center">Remember me</span>
                 </div>
-                <span className="underline font-bold text-xs cursor-pointer">Forgot Password?</span>
+                <span className="underline font-bold text-xs cursor-pointer" onClick={() => navigate("/forget-password")}>
+                  Forgot Password?
+                </span>
               </div>
               <button
                 type="submit"

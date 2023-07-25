@@ -71,7 +71,7 @@ const PaymentSettings = () => {
     <div className="h-full">
       <h2 className="font-bold text-lg my-[60px]">Payment</h2>
       <h2 className="mb-[50px] font-bold text-lg">Payment Methods</h2>
-      {paymentMethods.length !== 0 ? (
+      {paymentMethods !== null ? (
         <>
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {paymentMethods.map((method, index) => (
